@@ -35,20 +35,12 @@ public class ImageYUV {
 	}
 	
 	/**
-	 * Initialize YUV image with specified with black background
+	 * Initialize YUV image with specified size and with black color
 	 * @param width image's width
 	 * @param height image's height
 	 */
 	public ImageYUV(int width, int height) {
 		this(width, height, 0, 128, 128);
-	}
-
-	/**
-	 * Initialize YUV image from a BufferedImage
-	 * @param img BufferedImage image
-	 */
-	public ImageYUV(BufferedImage img) {
-		this(ImageHelper.grabPixels(img), img.getWidth(), img.getHeight());
 	}
 	
 	/**
@@ -88,6 +80,14 @@ public class ImageYUV {
 		this.pixelsU = pu;
 		this.pixelsV = pv;		
 		
+	}
+	
+	/**
+	 * Initialize YUV image from a BufferedImage
+	 * @param img BufferedImage image
+	 */
+	public ImageYUV(BufferedImage img) {
+		this(ImageHelper.grabPixels(img), img.getWidth(), img.getHeight());
 	}
 	
 	/**
@@ -137,7 +137,7 @@ public class ImageYUV {
 	 * Get Height
 	 * @return image's height
 	 */
-	public int getheight() {
+	public int getHeight() {
 		return height;
 	}
 
