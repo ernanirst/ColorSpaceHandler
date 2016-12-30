@@ -11,7 +11,7 @@ public class ImageLAB {
 	private short[] pixelsB ;
 	
 	/**
-	 * Initialize YUV image with specified size and LAB components
+	 * Initialize LAB image with specified size and LAB components
 	 * @param width image's width
 	 * @param height image's height
 	 * @param l L component of LAB image
@@ -81,7 +81,7 @@ public class ImageLAB {
 	}
 	
 	/**
-	 * Initialize YUV image from a BufferedImage
+	 * Initialize LAB image from a BufferedImage
 	 * @param img BufferedImage image
 	 */
 	public ImageLAB(BufferedImage img) {
@@ -89,7 +89,7 @@ public class ImageLAB {
 	}
 	
 	/**
-	 * Convert YUV image to a RGB image
+	 * Convert LAB image to a RGB image
 	 * @return an array of RGB pixels
 	 */
 	public int[] getPixelsRGB() {
@@ -108,7 +108,7 @@ public class ImageLAB {
 	// getter and setters
 	
 	/**
-	 * Create a BufferedImage from the YUV image
+	 * Create a BufferedImage from the LAB image
 	 * @return a BufferedImage
 	 */
 	public BufferedImage getBufferedImage() {
@@ -137,17 +137,17 @@ public class ImageLAB {
 	 * Get a pixel given its position in the image
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
-	 * @return an integer compound of the YUV components on each byte
+	 * @return an integer compound of the LAB components on each byte
 	 */
 	private int getPixelIndex(int x, int y) {
 		return (width * y) + x;
 	}
 	
 	/**
-	 * Get Y component of a pixel given its position
+	 * Get L component of a pixel given its position
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the Y component
+	 * @return a short with the value of the L component
 	 */
 	public short getL(int x, int y) {
 		int i = getPixelIndex(x, y);
@@ -155,10 +155,10 @@ public class ImageLAB {
 	}
 
 	/**
-	 * Get U component of a pixel given its position
+	 * Get A component of a pixel given its position
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the U component
+	 * @return a short with the value of the A component
 	 */
 	public short getA(int x, int y) {
 		int i = getPixelIndex(x, y);
@@ -166,10 +166,10 @@ public class ImageLAB {
 	}
 	
 	/**
-	 * Get V component of a pixel given its position
+	 * Get B component of a pixel given its position
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the V component
+	 * @return a short with the value of the B component
 	 */
 	public short getB(int x, int y) {
 		int i = getPixelIndex(x, y);
