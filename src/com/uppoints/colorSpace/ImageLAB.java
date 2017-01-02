@@ -150,7 +150,7 @@ public class ImageLAB {
 	 * @param y pixel's vertical axis position
 	 * @return a pixel with the value of the chosen channel
 	 */
-	public float getChannelPixel(int ch, int x, int y){
+	public float get(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
 		switch(ch){
 			case 1:
@@ -172,7 +172,7 @@ public class ImageLAB {
 	 * @param A image's A component
 	 * @param B image's B component
 	 */
-	public void setLAB(int x, int y, short L, short A, short B){
+	public void set(int x, int y, short L, short A, short B){
 		int i =	getPixelIndex(x, y);
 		pixelsL[i] = L;
 		pixelsA[i] = A;
@@ -186,7 +186,7 @@ public class ImageLAB {
 	 * @param y pixel's vertical axis position
 	 * @param chValue value of the chosen channel
 	 */
-	public void setChannel(int ch, int x, int y, short chValue){
+	public void set(int ch, int x, int y, short chValue){
 		int i =	getPixelIndex(x, y);
 		switch(ch){
 			case 1:

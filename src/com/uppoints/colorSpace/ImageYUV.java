@@ -2,12 +2,8 @@ package com.uppoints.colorSpace;
 
 import java.awt.image.BufferedImage;
 
-import com.uppoints.colorSpace.ImageHelper;
+public class ImageYUV extends ImageAbstract<Short> {
 
-public class ImageYUV {
-
-	private int width ;
-	private int height ;
 	private short[] pixelsY ;
 	private short[] pixelsU ;
 	private short[] pixelsV ;
@@ -21,8 +17,7 @@ public class ImageYUV {
 	 * @param v V component of YUV image
 	 */
 	public ImageYUV(int width, int height, int y, int u, int v) {
-		this.width = width;
-		this.height = height;
+		super(width, height) ;
 		
 		int totalPixels = width * height;
 		this.pixelsY = new short[totalPixels];
@@ -50,8 +45,7 @@ public class ImageYUV {
 	 * @param height image's height
 	 */
 	public ImageYUV(int[] pixelsRGB, int width, int height) {
-		this.width = width;
-		this.height = height;
+		super(width, height) ;
 		
 		int totalPixels = width * height;
 		short[] py = new short[totalPixels];
@@ -94,6 +88,7 @@ public class ImageYUV {
 	 * Convert YUV image to a RGB image
 	 * @return an array of RGB pixels
 	 */
+	@Override
 	public int[] getPixelsRGB() {
 		int totalPixels = width * height;
 		int[] pixelsRGB = new int[totalPixels];
@@ -113,52 +108,7 @@ public class ImageYUV {
 		return pixelsRGB ;
 	}
 	
-	// getter and setters
-	
-	/**
-	 * Create a BufferedImage from the YUV image
-	 * @return a BufferedImage
-	 */
-	public BufferedImage getBufferedImage() {
-		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		img.setRGB(0, 0, width, height, getPixelsRGB(), 0, width);
-		return img ;
-	}
-	
-	/**
-	 * Get width
-	 * @return image's width
-	 */
-	public int getWidth() {
-		return width;
-	}
-	
-	/**
-	 * Get Height
-	 * @return image's height
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Get a pixel given its position in the image
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return an integer compound of the YUV components on each byte
-	 */
-	private int getPixelIndex(int x, int y) {
-		return (width * y) + x;
-	}
-	
-	/**
-	 * Get a pixel given its position and channel
-	 * @param ch pixel's channel
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return a pixel with the value of the chosen channel
-	 */
-	public short getChannelPixel(int ch, int x, int y){
+	public Short get(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
 		switch(ch){
 			case 1:
@@ -172,29 +122,15 @@ public class ImageYUV {
 		}
 	}
 	
-	/**
-	 * Set new value to YUV components of a specific pixel given its position
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @param Y image's Y component
-	 * @param U image's U component
-	 * @param V image's V component
-	 */
-	public void setYUV(int x, int y, short Y, short U, short V){
+	public void set(int x, int y, Short Y, Short U, Short V) {
 		int i =	getPixelIndex(x, y);
 		pixelsY[i] = Y;
 		pixelsU[i] = U;
 		pixelsV[i] = V;
 	}
 	
-	/**
-	 * Set new value a pixel given its position and channel
-	 * @param ch pixel's channel
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @param chValue value of the chosen channel
-	 */
-	public void setChannel(int ch, int x, int y, short chValue){
+	
+	public void set(int ch, int x, int y, Short chValue){
 		int i =	getPixelIndex(x, y);
 		switch(ch){
 			case 1:
