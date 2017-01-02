@@ -3,9 +3,7 @@ package com.uppoints.colorSpace;
 import java.awt.image.BufferedImage;
 
 public class ImageLAB extends ImageAbstract<Float> {
-	
-	private int width ;
-	private int height ;
+
 	private float[] pixelsL ;
 	private float[] pixelsA ;
 	private float[] pixelsB ;
@@ -112,13 +110,6 @@ public class ImageLAB extends ImageAbstract<Float> {
 	
 	// getter and setters
 	
-	/**
-	 * Get a pixel given its position and channel
-	 * @param ch pixel's channel
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return a pixel with the value of the chosen channel
-	 */
 	@Override
 	public Float get(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
@@ -134,14 +125,6 @@ public class ImageLAB extends ImageAbstract<Float> {
 		}
 	}
 	
-	/**
-	 * Set new value to LAB components of a specific pixel given its position
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @param L image's L component
-	 * @param A image's A component
-	 * @param B image's B component
-	 */
 	@Override
 	public void set(int x, int y, Float L, Float A, Float B){
 		int i =	getPixelIndex(x, y);
@@ -150,13 +133,6 @@ public class ImageLAB extends ImageAbstract<Float> {
 		pixelsB[i] = B;
 	}
 	
-	/**
-	 * Set new value a pixel given its position and channel
-	 * @param ch pixel's channel
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @param chValue value of the chosen channel
-	 */
 	@Override
 	public void set(int ch, int x, int y, Float chValue){
 		int i =	getPixelIndex(x, y);
