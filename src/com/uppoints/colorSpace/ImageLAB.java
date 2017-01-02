@@ -147,5 +147,81 @@ public class ImageLAB extends ImageAbstract<Float> {
 				throw new UnsupportedOperationException("Unknown channel: " + ch);
 		}
 	}
+
+	@Override
+	public int getRGB(int x, int y) {
+		int i =	getPixelIndex(x, y);		
+		float[] bufferRGB = new float[3];
+		return ImageHelper.fromLABtoRGB(pixelsL[i], pixelsA[i], pixelsB[i], bufferRGB);
+	}
+
+	@Override
+	public short getRGB(int ch, int x, int y) {
+		int i =	getPixelIndex(x, y);		
+		float[] bufferRGB = new float[3];
+		
+		int rgb = ImageHelper.fromLABtoRGB(pixelsL[i], pixelsA[i], pixelsB[i], bufferRGB);
+		int r = (rgb >> 16) & 0x000000ff ;
+		int g = (rgb >> 8) & 0x000000ff ;
+		int b = rgb & 0x000000ff ;
+		
+		switch(ch){
+			case 1:
+				return (short)r ;
+			case 2:
+				return (short)g ;
+			case 3:
+				return (short)b ;
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}	
+	}
+
+	@Override
+	public void setRGB(int ch, int x, int y, short rgbValue) {
+		int i =	getPixelIndex(x, y);
+		
+		float[] bufferRGB = new float[3];		
+		int rgb = ImageHelper.fromLABtoRGB(pixelsL[i], pixelsA[i], pixelsB[i], bufferRGB);
+		int r = (rgb >> 16) & 0x000000ff ;
+		int g = (rgb >> 8) & 0x000000ff ;
+		int b = rgb & 0x000000ff ;
+		
+		switch(ch){
+			case 1:
+				r = rgbValue;
+				break;
+			case 2:
+				g = rgbValue;
+				break;
+			case 3:
+				b = rgbValue;
+				break;
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}
+		
+		float[] retLAB = new float[3];		
+		ImageHelper.fromRGBtoLAB(r, g, b, retLAB);
+		
+		pixelsL[i] = (short)retLAB[0];
+		pixelsA[i] = (short)retLAB[1];
+		pixelsB[i] = (short)retLAB[2];
+	}
+
+	@Override
+	public void setRGB(int x, int y, int rgb) {
+		int i =	getPixelIndex(x, y);
+		
+		int r = (rgb >> 16) & 0x000000ff ;
+		int g = (rgb >> 8) & 0x000000ff ;
+		int b = rgb & 0x000000ff ;
+		float[] retLAB = new float[3];
+		ImageHelper.fromRGBtoLAB(r, g, b, retLAB);
+		
+		pixelsL[i] = (short)retLAB[0];
+		pixelsA[i] = (short)retLAB[1];
+		pixelsB[i] = (short)retLAB[2];
+	}
 	
 }

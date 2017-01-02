@@ -82,11 +82,39 @@ abstract public class ImageAbstract<T> {
 	 * @param chValue value of the chosen channel
 	 */
 	abstract public void set(int ch, int x, int y, T chValue) ;
-	
+		
+	/**
+	 * Get an integer that contains all channels
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @return all channels in an integer
+	 */
 	abstract public int getRGB(int x, int y) ;
+	
+	/**
+	 * Get channel's value given its position
+	 * @param ch pixel's channel
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @return channel's value
+	 */
 	abstract public short getRGB(int ch, int x, int y) ;
 	
+	/**
+	 * Set new value to pixel given it's channel, position and RGB value 
+	 * @param ch pixel's channel
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @param rgbValue channel's value
+	 */
 	abstract public void setRGB(int ch, int x, int y, short rgbValue) ;
+	
+	/**
+	 * Set new value to pixel given it's position and RGB value 
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @param rgb integer will all channels values
+	 */
 	abstract public void setRGB(int x, int y, int rgb) ;
 	
 }
