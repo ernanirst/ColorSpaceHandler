@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -30,14 +31,31 @@ public class Main {
 		
     }
 	
+	private static void showImage(BufferedImage img, String title) {
+		JFrame frame = new JFrame(title);
+		frame.getContentPane().setLayout(new FlowLayout());
+		frame.getContentPane().add(new JLabel(new ImageIcon(img)));
+		frame.pack();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	static public BufferedImage loadImage() throws IOException {
+		//URL url = new URL("http://combiboilersleeds.com/images/vivid/vivid-6.jpg") ;
+		URL url = new URL("http://www.fotoblur.com/imgs/0/0/3/0/2/8/6/432429.jpg") ;
+		
+		System.out.println("-- loading image: "+ url);
+		BufferedImage image = ImageIO.read(url) ;
+		System.out.println("-- Image loaded: "+ image);
+		return image ;
+	}
+	
 	/**
 	 * Creates YUV image from file, converts to RGB and save it
 	 * @throws IOException
 	 */
 	public static void testYUVcreateImageFromFile() throws IOException{
-		File file = new File("/home/krashnovr/Imagens/rainbow.png") ;
-		
-		BufferedImage img = ImageIO.read(file) ;
+		BufferedImage img = loadImage() ;
 		
 		ImageYUV imageYUV = new ImageYUV(img) ;
 		
@@ -59,27 +77,21 @@ public class Main {
 	 */
 	public static void testYUVShowImageOnJFrame() throws IOException{
 		
-		File file = new File("/home/krashnovr/Imagens/web-dev-meme.jpeg") ;
-		BufferedImage image = ImageIO.read(file) ;
+		BufferedImage image = loadImage() ;
+		
 		ImageLAB imageYUV = new ImageLAB(image) ;
 		BufferedImage img = imageYUV.getBufferedImage();
 		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(new FlowLayout());
-		frame.getContentPane().add(new JLabel(new ImageIcon(img)));
-		frame.pack();
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		showImage(img,"YUV");
 	}
+
 	
 	/**
 	 * Creates LAB image from file, converts to RGB and save it
 	 * @throws IOException
 	 */
 	public static void testLABcreateImageFromFile() throws IOException{
-		File file = new File("/home/krashnovr/Imagens/rainbow.png") ;
-		
-		BufferedImage img = ImageIO.read(file) ;
+		BufferedImage img = loadImage() ;
 		
 		ImageLAB imageLAB = new ImageLAB(img) ;
 		
@@ -101,17 +113,11 @@ public class Main {
 	 */
 	public static void testLABShowImageOnJFrame() throws IOException{
 		
-		File file = new File("/home/krashnovr/Imagens/rainbow.png") ;
-		BufferedImage image = ImageIO.read(file) ;
+		BufferedImage image = loadImage() ;
 		ImageLAB imageLAB = new ImageLAB(image) ;
 		BufferedImage img = imageLAB.getBufferedImage();
 		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(new FlowLayout());
-		frame.getContentPane().add(new JLabel(new ImageIcon(img)));
-		frame.pack();
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		showImage(img,"LAB");
 	}
 	
 }
