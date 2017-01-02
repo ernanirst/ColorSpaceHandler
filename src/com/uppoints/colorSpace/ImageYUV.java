@@ -145,5 +145,75 @@ public class ImageYUV extends ImageAbstract<Short> {
 				throw new UnsupportedOperationException("Unknown channel: " + ch);
 		}
 	}
+
+	@Override
+	public int getRGB(int x, int y) {
+		int i =	getPixelIndex(x, y);
+
+		int[] retRGB = new int[3];		
+		ImageHelper.fromYUVtoRGB(pixelsY[i], pixelsU[i], pixelsV[i], retRGB);
+		int r = retRGB[0] ;
+		int g = retRGB[1] ;
+		int b = retRGB[2] ;
+	
+		return ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF) ;
+	}
+
+	@Override
+	public short getRGB(int ch, int x, int y) {
+		int i =	getPixelIndex(x, y);
+
+		int[] retRGB = new int[3];		
+		ImageHelper.fromYUVtoRGB(pixelsY[i], pixelsU[i], pixelsV[i], retRGB);
+		int r = retRGB[0] ;
+		int g = retRGB[1] ;
+		int b = retRGB[2] ;
+		
+		switch(ch){
+			case 1:
+				return (short)r ;
+			case 2:
+				return (short)g ;
+			case 3:
+				return (short)b ;
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}		
+	}
+
+	@Override
+	public void setRGB(int ch, int x, int y, short rgbValue) {
+		int i =	getPixelIndex(x, y);
+		switch(ch){
+			case 1:
+				pixelsY[i] = rgbValue;
+				break;
+			case 2:
+				pixelsU[i] = rgbValue;
+				break;
+			case 3:
+				pixelsV[i] = rgbValue;
+				break;
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}
+	}
+
+	@Override
+	public void setRGB(int x, int y, int rgb) {
+		int i =	getPixelIndex(x, y);
+		
+		// convert to YUV
+		int r = (rgb >> 16) & 0x000000ff ;
+		int g = (rgb >> 8) & 0x000000ff ;
+		int b = rgb & 0x000000ff ;
+		int[] retYUV = new int[3];
+		ImageHelper.fromRGBtoYUV(r, g, b, retYUV);
+		
+		// set channels
+		pixelsY[i] = (short)retYUV[0];
+		pixelsU[i] = (short)retYUV[1];
+		pixelsV[i] = (short)retYUV[2];
+	}
 	
 }
