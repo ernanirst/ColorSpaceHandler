@@ -86,7 +86,7 @@ abstract public class ImageAbstract<T> {
 	abstract public int getRGB(int x, int y) ;
 	abstract public short getRGB(int ch, int x, int y) ;
 	
-	abstract public short setRGB(int ch, int x, int y, short rgbValue) ;
-	abstract public short setRGB(int x, int y, int rgb) ;
+	abstract public void setRGB(int ch, int x, int y, short rgbValue) ;
+	abstract public void setRGB(int x, int y, int rgb) ;
 	
 }
