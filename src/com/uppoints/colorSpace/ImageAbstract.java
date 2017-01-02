@@ -72,7 +72,7 @@ abstract public class ImageAbstract<T> {
 	 * @param U image's U component
 	 * @param V image's V component
 	 */
-	abstract public void set(int x, int y, T Y, T U, T V) ;
+	abstract public void set(int x, int y, T C1, T C2, T C3) ;
 	
 	/**
 	 * Set new value of a pixel channel, given its channel id and position.
