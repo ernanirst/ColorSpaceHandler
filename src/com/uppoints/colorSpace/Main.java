@@ -11,6 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import com.uppoints.colorSpace.filter.FilterAutoContrast;
+import com.uppoints.colorSpace.filter.FilterGreyScale;
+import com.uppoints.colorSpace.filter.FilterReduceBright;
+
 public class Main {
 	
 	/**
@@ -79,7 +83,14 @@ public class Main {
 		
 		BufferedImage image = loadImage() ;
 		
-		ImageLAB imageYUV = new ImageLAB(image) ;
+		ImageYUV imageYUV = new ImageYUV(image) ;
+		
+		//new FilterGreyScale(imageYUV).applyFilter();
+		
+		//new FilterAutoContrast(imageYUV).applyFilter();
+		
+		new FilterReduceBright(imageYUV,0.5f).applyFilter(); 
+		
 		BufferedImage img = imageYUV.getBufferedImage();
 		
 		showImage(img,"YUV");

@@ -117,4 +117,13 @@ abstract public class ImageAbstract<T> {
 	 */
 	abstract public void setRGB(int x, int y, int rgb) ;
 	
+	public void setRGB(int x, int y, int r, int g, int b) {
+		int rgb = ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF) ;
+		setRGB(x, y, rgb);
+	}
+	
+	public void setRGB(int x, int y, int[] rgb) {
+		setRGB(x, y, rgb[0], rgb[1], rgb[2]);
+	}
+	
 }
