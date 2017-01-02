@@ -164,4 +164,40 @@ public class ImageLAB {
 		}
 	}
 	
+	/**
+	 * Set new value to LAB components of a specific pixel given its position
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @param L image's L component
+	 * @param A image's A component
+	 * @param B image's B component
+	 */
+	public void setLAB(int x, int y, short L, short A, short B){
+		int i =	getPixelIndex(x, y);
+		pixelsL[i] = L;
+		pixelsA[i] = A;
+		pixelsB[i] = B;
+	}
+	
+	/**
+	 * Set new value a pixel given its position and channel
+	 * @param ch pixel's channel
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @param chValue value of the chosen channel
+	 */
+	public void setChannel(int ch, int x, int y, short chValue){
+		int i =	getPixelIndex(x, y);
+		switch(ch){
+			case 1:
+				pixelsL[i] = chValue;
+			case 2:
+				pixelsA[i] = chValue;
+			case 3:
+				pixelsB[i] = chValue;
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}
+	}
+	
 }

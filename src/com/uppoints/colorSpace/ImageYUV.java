@@ -173,7 +173,7 @@ public class ImageYUV {
 	}
 	
 	/**
-	 * Give new value to YUV components of a specific pixel given its position
+	 * Set new value to YUV components of a specific pixel given its position
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
 	 * @param Y image's Y component
@@ -185,6 +185,27 @@ public class ImageYUV {
 		pixelsY[i] = Y;
 		pixelsU[i] = U;
 		pixelsV[i] = V;
+	}
+	
+	/**
+	 * Set new value a pixel given its position and channel
+	 * @param ch pixel's channel
+	 * @param x pixel's horizontal axis position
+	 * @param y pixel's vertical axis position
+	 * @param chValue value of the chosen channel
+	 */
+	public void setChannel(int ch, int x, int y, short chValue){
+		int i =	getPixelIndex(x, y);
+		switch(ch){
+			case 1:
+				pixelsY[i] = chValue;
+			case 2:
+				pixelsU[i] = chValue;
+			case 3:
+				pixelsV[i] = chValue;
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}
 	}
 	
 }
