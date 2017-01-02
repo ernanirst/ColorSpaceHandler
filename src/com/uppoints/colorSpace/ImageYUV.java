@@ -108,6 +108,7 @@ public class ImageYUV extends ImageAbstract<Short> {
 		return pixelsRGB ;
 	}
 	
+	@Override
 	public Short get(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
 		switch(ch){
@@ -122,6 +123,7 @@ public class ImageYUV extends ImageAbstract<Short> {
 		}
 	}
 	
+	@Override
 	public void set(int x, int y, Short Y, Short U, Short V) {
 		int i =	getPixelIndex(x, y);
 		pixelsY[i] = Y;
@@ -129,7 +131,7 @@ public class ImageYUV extends ImageAbstract<Short> {
 		pixelsV[i] = V;
 	}
 	
-	
+	@Override
 	public void set(int ch, int x, int y, Short chValue){
 		int i =	getPixelIndex(x, y);
 		switch(ch){

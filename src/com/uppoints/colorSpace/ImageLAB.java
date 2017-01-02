@@ -2,7 +2,7 @@ package com.uppoints.colorSpace;
 
 import java.awt.image.BufferedImage;
 
-public class ImageLAB {
+public class ImageLAB extends ImageAbstract<Float> {
 	
 	private int width ;
 	private int height ;
@@ -18,7 +18,9 @@ public class ImageLAB {
 	 * @param a A component of LAB image
 	 * @param b B component of LAB image
 	 */
-	public ImageLAB(int width, int height, float l, float a, float b){
+	public ImageLAB(int width, int height, Float l, Float a, Float b){
+		super(width, height) ;
+		
 		this.width = width;
 		this.height = height;
 		
@@ -38,7 +40,7 @@ public class ImageLAB {
 	 * @param height image's height
 	 */
 	public ImageLAB(int width, int height) {
-		this(width, height, 0, 0, 0);
+		this(width, height, new Float(0), new Float(0), new Float(0));
 	}
 	
 	/**
@@ -48,6 +50,8 @@ public class ImageLAB {
 	 * @param height image's height
 	 */
 	public ImageLAB(int[] pixelsRGB, int width, int height) {
+		super(width, height) ;
+		
 		this.width = width;
 		this.height = height;
 		
@@ -92,6 +96,7 @@ public class ImageLAB {
 	 * Convert LAB image to a RGB image
 	 * @return an array of RGB pixels
 	 */
+	@Override
 	public int[] getPixelsRGB() {
 		int totalPixels = width * height;
 		int[] pixelsRGB = new int[totalPixels];
@@ -108,49 +113,14 @@ public class ImageLAB {
 	// getter and setters
 	
 	/**
-	 * Create a BufferedImage from the LAB image
-	 * @return a BufferedImage
-	 */
-	public BufferedImage getBufferedImage() {
-		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		img.setRGB(0, 0, width, height, getPixelsRGB(), 0, width);
-		return img ;
-	}
-	
-	/**
-	 * Get width
-	 * @return image's width
-	 */
-	public int getWidth() {
-		return width;
-	}
-	
-	/**
-	 * Get Height
-	 * @return image's height
-	 */
-	public int getheight() {
-		return height;
-	}
-	
-	/**
-	 * Get a pixel given its position in the image
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return an integer compound of the LAB components on each byte
-	 */
-	private int getPixelIndex(int x, int y) {
-		return (width * y) + x;
-	}
-	
-	/**
 	 * Get a pixel given its position and channel
 	 * @param ch pixel's channel
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
 	 * @return a pixel with the value of the chosen channel
 	 */
-	public float get(int ch, int x, int y){
+	@Override
+	public Float get(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
 		switch(ch){
 			case 1:
@@ -172,7 +142,8 @@ public class ImageLAB {
 	 * @param A image's A component
 	 * @param B image's B component
 	 */
-	public void set(int x, int y, short L, short A, short B){
+	@Override
+	public void set(int x, int y, Float L, Float A, Float B){
 		int i =	getPixelIndex(x, y);
 		pixelsL[i] = L;
 		pixelsA[i] = A;
@@ -186,7 +157,8 @@ public class ImageLAB {
 	 * @param y pixel's vertical axis position
 	 * @param chValue value of the chosen channel
 	 */
-	public void set(int ch, int x, int y, short chValue){
+	@Override
+	public void set(int ch, int x, int y, Float chValue){
 		int i =	getPixelIndex(x, y);
 		switch(ch){
 			case 1:
