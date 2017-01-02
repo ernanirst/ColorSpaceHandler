@@ -16,6 +16,18 @@ public abstract class ImageHelper {
 		}
 	}
 	
+	/**
+	 * Set all elements of an array with a given value
+	 * @param a array that will receive new values
+	 * @param v new value
+	 */
+	static public void setArray(float[] a, float v) {
+		int totalPixels = a.length;
+		for (int i = 0; i < totalPixels; i++) {
+			a[i] = v;
+		}
+	}
+	
 	//===========================================================================================
 	//== YUV HELPERS ============================================================================
 	

@@ -6,9 +6,9 @@ public class ImageLAB {
 	
 	private int width ;
 	private int height ;
-	private short[] pixelsL ;
-	private short[] pixelsA ;
-	private short[] pixelsB ;
+	private float[] pixelsL ;
+	private float[] pixelsA ;
+	private float[] pixelsB ;
 	
 	/**
 	 * Initialize LAB image with specified size and LAB components
@@ -18,18 +18,18 @@ public class ImageLAB {
 	 * @param a A component of LAB image
 	 * @param b B component of LAB image
 	 */
-	public ImageLAB(int width, int height, int l, int a, int b){
+	public ImageLAB(int width, int height, float l, float a, float b){
 		this.width = width;
 		this.height = height;
 		
 		int totalPixels = width * height;
-		this.pixelsL = new short[totalPixels];
-		this.pixelsA = new short[totalPixels];
-		this.pixelsB = new short[totalPixels];
+		this.pixelsL = new float[totalPixels];
+		this.pixelsA = new float[totalPixels];
+		this.pixelsB = new float[totalPixels];
 		
-		ImageHelper.setArray(this.pixelsL, (short)l);
-		ImageHelper.setArray(this.pixelsA, (short)a);
-		ImageHelper.setArray(this.pixelsB, (short)b);
+		ImageHelper.setArray(this.pixelsL, l);
+		ImageHelper.setArray(this.pixelsA, a);
+		ImageHelper.setArray(this.pixelsB, b);
 	}
 	
 	/**
@@ -52,9 +52,9 @@ public class ImageLAB {
 		this.height = height;
 		
 		int totalPixels = width * height;
-		short[] pl = new short[totalPixels];
-		short[] pa = new short[totalPixels];
-		short[] pb = new short[totalPixels];
+		float[] pl = new float[totalPixels];
+		float[] pa = new float[totalPixels];
+		float[] pb = new float[totalPixels];
 		
 		float[] retLAB = new float[3];
 		
@@ -68,9 +68,9 @@ public class ImageLAB {
 			ImageHelper.fromRGBtoLAB(r, g, b, retLAB);
 			
 			// set pixels
-			pl[i] = (short)retLAB[0];
-			pa[i] = (short)retLAB[1];
-			pb[i] = (short)retLAB[2];
+			pl[i] = retLAB[0];
+			pa[i] = retLAB[1];
+			pb[i] = retLAB[2];
 			
 		}
 		
@@ -149,7 +149,7 @@ public class ImageLAB {
 	 * @param y pixel's vertical axis position
 	 * @return a short with the value of the L component
 	 */
-	public short getL(int x, int y) {
+	public float getL(int x, int y) {
 		int i = getPixelIndex(x, y);
 		return pixelsL[i];
 	}
@@ -160,7 +160,7 @@ public class ImageLAB {
 	 * @param y pixel's vertical axis position
 	 * @return a short with the value of the A component
 	 */
-	public short getA(int x, int y) {
+	public float getA(int x, int y) {
 		int i = getPixelIndex(x, y);
 		return pixelsA[i];
 	}
@@ -171,7 +171,7 @@ public class ImageLAB {
 	 * @param y pixel's vertical axis position
 	 * @return a short with the value of the B component
 	 */
-	public short getB(int x, int y) {
+	public float getB(int x, int y) {
 		int i = getPixelIndex(x, y);
 		return pixelsB[i];
 	}
