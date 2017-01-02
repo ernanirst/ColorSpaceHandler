@@ -181,8 +181,8 @@ public class ImageLAB extends ImageAbstract<Float> {
 	public void setRGB(int ch, int x, int y, short rgbValue) {
 		int i =	getPixelIndex(x, y);
 		
-		float[] bufferRGB = new float[3];		
-		int rgb = ImageHelper.fromLABtoRGB(pixelsL[i], pixelsA[i], pixelsB[i], bufferRGB);
+		float[] xyzBuffer = new float[3];		
+		int rgb = ImageHelper.fromLABtoRGB(pixelsL[i], pixelsA[i], pixelsB[i], xyzBuffer);
 		int r = (rgb >> 16) & 0x000000ff ;
 		int g = (rgb >> 8) & 0x000000ff ;
 		int b = rgb & 0x000000ff ;
