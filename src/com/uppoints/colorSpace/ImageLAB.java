@@ -144,36 +144,24 @@ public class ImageLAB {
 	}
 	
 	/**
-	 * Get L component of a pixel given its position
+	 * Get a pixel given its position and channel
+	 * @param ch pixel's channel
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the L component
+	 * @return a pixel with the value of the chosen channel
 	 */
-	public float getL(int x, int y) {
+	public float getChannelPixel(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
-		return pixelsL[i];
-	}
-
-	/**
-	 * Get A component of a pixel given its position
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the A component
-	 */
-	public float getA(int x, int y) {
-		int i = getPixelIndex(x, y);
-		return pixelsA[i];
-	}
-	
-	/**
-	 * Get B component of a pixel given its position
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the B component
-	 */
-	public float getB(int x, int y) {
-		int i = getPixelIndex(x, y);
-		return pixelsB[i];
+		switch(ch){
+			case 1:
+				return pixelsL[i];
+			case 2:
+				return pixelsA[i];
+			case 3:
+				return pixelsB[i];
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}
 	}
 	
 }

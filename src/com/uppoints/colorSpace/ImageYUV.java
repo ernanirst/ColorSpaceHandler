@@ -152,36 +152,24 @@ public class ImageYUV {
 	}
 	
 	/**
-	 * Get Y component of a pixel given its position
+	 * Get a pixel given its position and channel
+	 * @param ch pixel's channel
 	 * @param x pixel's horizontal axis position
 	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the Y component
+	 * @return a pixel with the value of the chosen channel
 	 */
-	public short getY(int x, int y) {
+	public short getChannelPixel(int ch, int x, int y){
 		int i = getPixelIndex(x, y);
-		return pixelsY[i];
-	}
-
-	/**
-	 * Get U component of a pixel given its position
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the U component
-	 */
-	public short getU(int x, int y) {
-		int i = getPixelIndex(x, y);
-		return pixelsU[i];
-	}
-	
-	/**
-	 * Get V component of a pixel given its position
-	 * @param x pixel's horizontal axis position
-	 * @param y pixel's vertical axis position
-	 * @return a short with the value of the V component
-	 */
-	public short getV(int x, int y) {
-		int i = getPixelIndex(x, y);
-		return pixelsV[i];
+		switch(ch){
+			case 1:
+				return pixelsY[i];
+			case 2:
+				return pixelsU[i];
+			case 3:
+				return pixelsV[i];
+			default:
+				throw new UnsupportedOperationException("Unknown channel: " + ch);
+		}
 	}
 	
 	/**
